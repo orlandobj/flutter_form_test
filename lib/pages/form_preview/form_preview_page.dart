@@ -63,14 +63,13 @@ class _FormPreviewPageState extends State<FormPreviewPage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 30, right: 30),
         child: FloatingActionButton(
+          heroTag: 'quit_preview',
           onPressed: () {
             Get.back();
           },
           backgroundColor: ProjectColors.gray300,
           shape: const CircleBorder(),
-          child: const Icon(Icons.visibility,
-              color:
-                  ProjectColors.gray800),
+          child: const Icon(Icons.visibility, color: ProjectColors.gray800),
         ),
       ),
     );

@@ -114,6 +114,7 @@ class _FormCreationPageState extends State<FormCreationPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             FloatingActionButton(
+              heroTag: 'add',
               onPressed: () {
                 AddFieldBottomsheet.show().then((_) {
                   formCreationController.resetNewField();
@@ -121,19 +122,27 @@ class _FormCreationPageState extends State<FormCreationPage> {
               },
               backgroundColor: ProjectColors.gray800,
               shape: const CircleBorder(),
-              child: const Icon(Icons.add,
-                  color:
-                      ProjectColors.white),
+              child: const Icon(Icons.add, color: ProjectColors.white),
             ),
             const SizedBox(width: 10),
-            FloatingActionButton(
-              onPressed: () {
-                Get.to(const FormPreviewPage());
-              },
-              backgroundColor: ProjectColors.gray800,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.visibility, color: ProjectColors.white),
-            ),
+            Obx(() {
+              final isDisabled = formCreationController.listFields.isEmpty;
+              return FloatingActionButton(
+                heroTag: 'preview',
+                onPressed: isDisabled
+                    ? null
+                    : () {
+                        Get.to(const FormPreviewPage());
+                      },
+                backgroundColor:
+                    isDisabled ? ProjectColors.gray500 : ProjectColors.gray800,
+                shape: const CircleBorder(),
+                child: const Icon(
+                  Icons.visibility,
+                  color: ProjectColors.white,
+                ),
+              );
+            }),
           ],
         ),
       ),
